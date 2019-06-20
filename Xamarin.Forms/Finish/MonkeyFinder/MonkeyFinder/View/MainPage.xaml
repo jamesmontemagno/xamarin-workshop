@@ -12,7 +12,7 @@
         <viewmodel:MonkeysViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid RowSpacing="0" ColumnSpacing="5" CompressedLayout.IsHeadless="True">
+    <Grid RowSpacing="0" ColumnSpacing="8" CompressedLayout.IsHeadless="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
