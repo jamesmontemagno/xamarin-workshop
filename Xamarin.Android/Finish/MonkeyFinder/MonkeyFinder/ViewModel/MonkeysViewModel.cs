@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace MonkeyFinder.ViewModel
 {
-    public class MonkeysViewModel : BaseViewModel
+    public class MonkeysViewModel
     {
         HttpClient httpClient;
         HttpClient Client => httpClient ?? (httpClient = new HttpClient());
@@ -19,20 +19,15 @@ namespace MonkeyFinder.ViewModel
         public ObservableCollection<Monkey> Monkeys { get; }
         public MonkeysViewModel()
         {
-            Title = "Monkey Finder";
             Monkeys = new ObservableCollection<Monkey>();
 
         }
 
     
-        async Task GetMonkeysAsync()
+        public async Task GetMonkeysAsync()
         {
-            if (IsBusy)
-                return;
-
             try
             {
-                IsBusy = true;
 
                 var json = await Client.GetStringAsync("https://montemagno.com/monkeys.json");
                 var monkeys =  Monkey.FromJson(json);
@@ -48,14 +43,11 @@ namespace MonkeyFinder.ViewModel
             }
             finally
             {
-                IsBusy = false;
             }
         }
 
-        async Task GetClosestAsync()
+        public async Task GetClosestAsync()
         {
-            if (IsBusy || Monkeys.Count == 0)
-                return;
             try
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();

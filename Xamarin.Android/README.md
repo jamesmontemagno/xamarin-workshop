@@ -14,7 +14,7 @@ Follow our simple [setup guide](https://github.com/xamarin/dev-days-labs/raw/mas
 This MonkeyFinder contains 4 projects
 
 * MonkeyFinder  - Shared .NET Standard project that will have all shared code (model, views, view models, and services)
-* MonkeyFinder.Android - Xamarin.Android application
+* MonkeyFinder.Droid - Xamarin.Android application
 * MonkeyFinder.iOS - Xamarin.iOS application (requires a macOS build host)
 * MonkeyFinder.UWP - Windows 10 UWP application (requires Visual Studio /2017 on Windows 10)
 
@@ -804,7 +804,7 @@ If connected, you will see a Green connection status. Select `iPhoneSimulator` a
 
 #### Android Setup
 
-Set the MonkeyFinder.Android as the startup project and select your emulator or device to start debugging. With help for deployment head over to our [documentation](https://docs.microsoft.com/xamarin/android/deploy-test/debugging/).
+Set the MonkeyFinder.Droid as the startup project and select your emulator or device to start debugging. With help for deployment head over to our [documentation](https://docs.microsoft.com/xamarin/android/deploy-test/debugging/).
 
 #### Windows 10 Setup
 
