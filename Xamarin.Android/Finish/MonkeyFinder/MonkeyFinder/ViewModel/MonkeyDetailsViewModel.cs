@@ -6,7 +6,7 @@ using Xamarin.Essentials;
 
 namespace MonkeyFinder.ViewModel
 {
-    public class MonkeyDetailsViewModel : BaseViewModel
+    public class MonkeyDetailsViewModel
     {
         public MonkeyDetailsViewModel()
         {
@@ -17,7 +17,6 @@ namespace MonkeyFinder.ViewModel
             : this()
         {
             Monkey = monkey;
-            Title = $"{Monkey.Name} Details";
         }
         Monkey monkey;
         public Monkey Monkey
@@ -29,11 +28,10 @@ namespace MonkeyFinder.ViewModel
                     return;
 
                 monkey = value;
-                OnPropertyChanged();
             }
         }
 
-        async Task OpenMapAsync()
+        public async Task OpenMapAsync()
         {
             try
             {
@@ -42,7 +40,6 @@ namespace MonkeyFinder.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to launch maps: {ex.Message}");
-                //await Application.Current.MainPage.DisplayAlert("Error, no Maps app!", ex.Message, "OK");
             }
         }
     }

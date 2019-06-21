@@ -129,7 +129,6 @@
     <AndroidResource Include="Resources\layout\monkey_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\values\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonkeyFinder\MonkeyFinder.csproj">

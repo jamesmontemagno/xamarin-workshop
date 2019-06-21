@@ -314,22 +314,6 @@ namespace MonkeyFinder.Droid
 			}
 		}
 		
-		public partial class Array
-		{
-			
-			// aapt resource value: 0x7f100000
-			public const int mdcolor_random = 2131755008;
-			
-			static Array()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Array()
-			{
-			}
-		}
-		
 		public partial class Attribute
 		{
 			
@@ -1973,44 +1957,44 @@ namespace MonkeyFinder.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c017f
-			public const int abc_background_cache_hint_selector_material_dark = 2131493247;
+			// aapt resource value: 0x7f0c0061
+			public const int abc_background_cache_hint_selector_material_dark = 2131492961;
 			
-			// aapt resource value: 0x7f0c0180
-			public const int abc_background_cache_hint_selector_material_light = 2131493248;
+			// aapt resource value: 0x7f0c0062
+			public const int abc_background_cache_hint_selector_material_light = 2131492962;
 			
-			// aapt resource value: 0x7f0c0181
-			public const int abc_btn_colored_borderless_text_material = 2131493249;
+			// aapt resource value: 0x7f0c0063
+			public const int abc_btn_colored_borderless_text_material = 2131492963;
 			
-			// aapt resource value: 0x7f0c0182
-			public const int abc_btn_colored_text_material = 2131493250;
+			// aapt resource value: 0x7f0c0064
+			public const int abc_btn_colored_text_material = 2131492964;
 			
-			// aapt resource value: 0x7f0c0183
-			public const int abc_color_highlight_material = 2131493251;
+			// aapt resource value: 0x7f0c0065
+			public const int abc_color_highlight_material = 2131492965;
 			
-			// aapt resource value: 0x7f0c0184
-			public const int abc_hint_foreground_material_dark = 2131493252;
+			// aapt resource value: 0x7f0c0066
+			public const int abc_hint_foreground_material_dark = 2131492966;
 			
-			// aapt resource value: 0x7f0c0185
-			public const int abc_hint_foreground_material_light = 2131493253;
+			// aapt resource value: 0x7f0c0067
+			public const int abc_hint_foreground_material_light = 2131492967;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int abc_input_method_navigation_guard = 2131492868;
 			
-			// aapt resource value: 0x7f0c0186
-			public const int abc_primary_text_disable_only_material_dark = 2131493254;
+			// aapt resource value: 0x7f0c0068
+			public const int abc_primary_text_disable_only_material_dark = 2131492968;
 			
-			// aapt resource value: 0x7f0c0187
-			public const int abc_primary_text_disable_only_material_light = 2131493255;
+			// aapt resource value: 0x7f0c0069
+			public const int abc_primary_text_disable_only_material_light = 2131492969;
 			
-			// aapt resource value: 0x7f0c0188
-			public const int abc_primary_text_material_dark = 2131493256;
+			// aapt resource value: 0x7f0c006a
+			public const int abc_primary_text_material_dark = 2131492970;
 			
-			// aapt resource value: 0x7f0c0189
-			public const int abc_primary_text_material_light = 2131493257;
+			// aapt resource value: 0x7f0c006b
+			public const int abc_primary_text_material_light = 2131492971;
 			
-			// aapt resource value: 0x7f0c018a
-			public const int abc_search_url_text = 2131493258;
+			// aapt resource value: 0x7f0c006c
+			public const int abc_search_url_text = 2131492972;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int abc_search_url_text_normal = 2131492869;
@@ -2021,77 +2005,35 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c0007
 			public const int abc_search_url_text_selected = 2131492871;
 			
-			// aapt resource value: 0x7f0c018b
-			public const int abc_secondary_text_material_dark = 2131493259;
+			// aapt resource value: 0x7f0c006d
+			public const int abc_secondary_text_material_dark = 2131492973;
 			
-			// aapt resource value: 0x7f0c018c
-			public const int abc_secondary_text_material_light = 2131493260;
+			// aapt resource value: 0x7f0c006e
+			public const int abc_secondary_text_material_light = 2131492974;
 			
-			// aapt resource value: 0x7f0c018d
-			public const int abc_tint_btn_checkable = 2131493261;
+			// aapt resource value: 0x7f0c006f
+			public const int abc_tint_btn_checkable = 2131492975;
 			
-			// aapt resource value: 0x7f0c018e
-			public const int abc_tint_default = 2131493262;
+			// aapt resource value: 0x7f0c0070
+			public const int abc_tint_default = 2131492976;
 			
-			// aapt resource value: 0x7f0c018f
-			public const int abc_tint_edittext = 2131493263;
+			// aapt resource value: 0x7f0c0071
+			public const int abc_tint_edittext = 2131492977;
 			
-			// aapt resource value: 0x7f0c0190
-			public const int abc_tint_seek_thumb = 2131493264;
+			// aapt resource value: 0x7f0c0072
+			public const int abc_tint_seek_thumb = 2131492978;
 			
-			// aapt resource value: 0x7f0c0191
-			public const int abc_tint_spinner = 2131493265;
+			// aapt resource value: 0x7f0c0073
+			public const int abc_tint_spinner = 2131492979;
 			
-			// aapt resource value: 0x7f0c0192
-			public const int abc_tint_switch_track = 2131493266;
+			// aapt resource value: 0x7f0c0074
+			public const int abc_tint_switch_track = 2131492980;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int accent_material_dark = 2131492872;
 			
 			// aapt resource value: 0x7f0c0009
 			public const int accent_material_light = 2131492873;
-			
-			// aapt resource value: 0x7f0c0116
-			public const int amber_100 = 2131493142;
-			
-			// aapt resource value: 0x7f0c0117
-			public const int amber_200 = 2131493143;
-			
-			// aapt resource value: 0x7f0c0118
-			public const int amber_300 = 2131493144;
-			
-			// aapt resource value: 0x7f0c0119
-			public const int amber_400 = 2131493145;
-			
-			// aapt resource value: 0x7f0c0115
-			public const int amber_50 = 2131493141;
-			
-			// aapt resource value: 0x7f0c011a
-			public const int amber_500 = 2131493146;
-			
-			// aapt resource value: 0x7f0c011b
-			public const int amber_600 = 2131493147;
-			
-			// aapt resource value: 0x7f0c011c
-			public const int amber_700 = 2131493148;
-			
-			// aapt resource value: 0x7f0c011d
-			public const int amber_800 = 2131493149;
-			
-			// aapt resource value: 0x7f0c011e
-			public const int amber_900 = 2131493150;
-			
-			// aapt resource value: 0x7f0c011f
-			public const int amber_A100 = 2131493151;
-			
-			// aapt resource value: 0x7f0c0120
-			public const int amber_A200 = 2131493152;
-			
-			// aapt resource value: 0x7f0c0121
-			public const int amber_A400 = 2131493153;
-			
-			// aapt resource value: 0x7f0c0122
-			public const int amber_A700 = 2131493154;
 			
 			// aapt resource value: 0x7f0c000a
 			public const int background_floating_material_dark = 2131492874;
@@ -2104,81 +2046,6 @@ namespace MonkeyFinder.Droid
 			
 			// aapt resource value: 0x7f0c000d
 			public const int background_material_light = 2131492877;
-			
-			// aapt resource value: 0x7f0c013c
-			public const int blue_100 = 2131493180;
-			
-			// aapt resource value: 0x7f0c013d
-			public const int blue_200 = 2131493181;
-			
-			// aapt resource value: 0x7f0c013e
-			public const int blue_300 = 2131493182;
-			
-			// aapt resource value: 0x7f0c013f
-			public const int blue_400 = 2131493183;
-			
-			// aapt resource value: 0x7f0c013b
-			public const int blue_50 = 2131493179;
-			
-			// aapt resource value: 0x7f0c0140
-			public const int blue_500 = 2131493184;
-			
-			// aapt resource value: 0x7f0c0141
-			public const int blue_600 = 2131493185;
-			
-			// aapt resource value: 0x7f0c0142
-			public const int blue_700 = 2131493186;
-			
-			// aapt resource value: 0x7f0c0143
-			public const int blue_800 = 2131493187;
-			
-			// aapt resource value: 0x7f0c0144
-			public const int blue_900 = 2131493188;
-			
-			// aapt resource value: 0x7f0c0145
-			public const int blue_A100 = 2131493189;
-			
-			// aapt resource value: 0x7f0c0146
-			public const int blue_A200 = 2131493190;
-			
-			// aapt resource value: 0x7f0c0147
-			public const int blue_A400 = 2131493191;
-			
-			// aapt resource value: 0x7f0c0148
-			public const int blue_A700 = 2131493192;
-			
-			// aapt resource value: 0x7f0c00d1
-			public const int blue_grey_100 = 2131493073;
-			
-			// aapt resource value: 0x7f0c00d2
-			public const int blue_grey_200 = 2131493074;
-			
-			// aapt resource value: 0x7f0c00d3
-			public const int blue_grey_300 = 2131493075;
-			
-			// aapt resource value: 0x7f0c00d4
-			public const int blue_grey_400 = 2131493076;
-			
-			// aapt resource value: 0x7f0c00d0
-			public const int blue_grey_50 = 2131493072;
-			
-			// aapt resource value: 0x7f0c00d5
-			public const int blue_grey_500 = 2131493077;
-			
-			// aapt resource value: 0x7f0c00d6
-			public const int blue_grey_600 = 2131493078;
-			
-			// aapt resource value: 0x7f0c00d7
-			public const int blue_grey_700 = 2131493079;
-			
-			// aapt resource value: 0x7f0c00d8
-			public const int blue_grey_800 = 2131493080;
-			
-			// aapt resource value: 0x7f0c00da
-			public const int blue_grey_800_overlay = 2131493082;
-			
-			// aapt resource value: 0x7f0c00d9
-			public const int blue_grey_900 = 2131493081;
 			
 			// aapt resource value: 0x7f0c000e
 			public const int bright_foreground_disabled_material_dark = 2131492878;
@@ -2197,36 +2064,6 @@ namespace MonkeyFinder.Droid
 			
 			// aapt resource value: 0x7f0c0013
 			public const int bright_foreground_material_light = 2131492883;
-			
-			// aapt resource value: 0x7f0c0124
-			public const int brown_100 = 2131493156;
-			
-			// aapt resource value: 0x7f0c0125
-			public const int brown_200 = 2131493157;
-			
-			// aapt resource value: 0x7f0c0126
-			public const int brown_300 = 2131493158;
-			
-			// aapt resource value: 0x7f0c0127
-			public const int brown_400 = 2131493159;
-			
-			// aapt resource value: 0x7f0c0123
-			public const int brown_50 = 2131493155;
-			
-			// aapt resource value: 0x7f0c0128
-			public const int brown_500 = 2131493160;
-			
-			// aapt resource value: 0x7f0c0129
-			public const int brown_600 = 2131493161;
-			
-			// aapt resource value: 0x7f0c012a
-			public const int brown_700 = 2131493162;
-			
-			// aapt resource value: 0x7f0c012b
-			public const int brown_800 = 2131493163;
-			
-			// aapt resource value: 0x7f0c012c
-			public const int brown_900 = 2131493164;
 			
 			// aapt resource value: 0x7f0c0054
 			public const int browser_actions_bg_grey = 2131492948;
@@ -2276,135 +2113,6 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c005c
 			public const int colorPrimaryLight = 2131492956;
 			
-			// aapt resource value: 0x7f0c00f9
-			public const int cyan_100 = 2131493113;
-			
-			// aapt resource value: 0x7f0c00fa
-			public const int cyan_200 = 2131493114;
-			
-			// aapt resource value: 0x7f0c00fb
-			public const int cyan_300 = 2131493115;
-			
-			// aapt resource value: 0x7f0c00fc
-			public const int cyan_400 = 2131493116;
-			
-			// aapt resource value: 0x7f0c00f8
-			public const int cyan_50 = 2131493112;
-			
-			// aapt resource value: 0x7f0c00fd
-			public const int cyan_500 = 2131493117;
-			
-			// aapt resource value: 0x7f0c00fe
-			public const int cyan_600 = 2131493118;
-			
-			// aapt resource value: 0x7f0c00ff
-			public const int cyan_700 = 2131493119;
-			
-			// aapt resource value: 0x7f0c0100
-			public const int cyan_800 = 2131493120;
-			
-			// aapt resource value: 0x7f0c0106
-			public const int cyan_800_overlay = 2131493126;
-			
-			// aapt resource value: 0x7f0c0101
-			public const int cyan_900 = 2131493121;
-			
-			// aapt resource value: 0x7f0c0102
-			public const int cyan_A100 = 2131493122;
-			
-			// aapt resource value: 0x7f0c0103
-			public const int cyan_A200 = 2131493123;
-			
-			// aapt resource value: 0x7f0c0104
-			public const int cyan_A400 = 2131493124;
-			
-			// aapt resource value: 0x7f0c0105
-			public const int cyan_A700 = 2131493125;
-			
-			// aapt resource value: 0x7f0c00c3
-			public const int deep_orange_100 = 2131493059;
-			
-			// aapt resource value: 0x7f0c00c4
-			public const int deep_orange_200 = 2131493060;
-			
-			// aapt resource value: 0x7f0c00c5
-			public const int deep_orange_300 = 2131493061;
-			
-			// aapt resource value: 0x7f0c00c6
-			public const int deep_orange_400 = 2131493062;
-			
-			// aapt resource value: 0x7f0c00c2
-			public const int deep_orange_50 = 2131493058;
-			
-			// aapt resource value: 0x7f0c00c7
-			public const int deep_orange_500 = 2131493063;
-			
-			// aapt resource value: 0x7f0c00c8
-			public const int deep_orange_600 = 2131493064;
-			
-			// aapt resource value: 0x7f0c00c9
-			public const int deep_orange_700 = 2131493065;
-			
-			// aapt resource value: 0x7f0c00ca
-			public const int deep_orange_800 = 2131493066;
-			
-			// aapt resource value: 0x7f0c00cb
-			public const int deep_orange_900 = 2131493067;
-			
-			// aapt resource value: 0x7f0c00cc
-			public const int deep_orange_A100 = 2131493068;
-			
-			// aapt resource value: 0x7f0c00cd
-			public const int deep_orange_A200 = 2131493069;
-			
-			// aapt resource value: 0x7f0c00ce
-			public const int deep_orange_A400 = 2131493070;
-			
-			// aapt resource value: 0x7f0c00cf
-			public const int deep_orange_A700 = 2131493071;
-			
-			// aapt resource value: 0x7f0c008b
-			public const int deep_purple_100 = 2131493003;
-			
-			// aapt resource value: 0x7f0c008c
-			public const int deep_purple_200 = 2131493004;
-			
-			// aapt resource value: 0x7f0c008d
-			public const int deep_purple_300 = 2131493005;
-			
-			// aapt resource value: 0x7f0c008e
-			public const int deep_purple_400 = 2131493006;
-			
-			// aapt resource value: 0x7f0c008a
-			public const int deep_purple_50 = 2131493002;
-			
-			// aapt resource value: 0x7f0c008f
-			public const int deep_purple_500 = 2131493007;
-			
-			// aapt resource value: 0x7f0c0090
-			public const int deep_purple_600 = 2131493008;
-			
-			// aapt resource value: 0x7f0c0091
-			public const int deep_purple_700 = 2131493009;
-			
-			// aapt resource value: 0x7f0c0092
-			public const int deep_purple_800 = 2131493010;
-			
-			// aapt resource value: 0x7f0c0093
-			public const int deep_purple_900 = 2131493011;
-			
-			// aapt resource value: 0x7f0c0094
-			public const int deep_purple_A100 = 2131493012;
-			
-			// aapt resource value: 0x7f0c0095
-			public const int deep_purple_A200 = 2131493013;
-			
-			// aapt resource value: 0x7f0c0096
-			public const int deep_purple_A400 = 2131493014;
-			
-			// aapt resource value: 0x7f0c0097
-			public const int deep_purple_A700 = 2131493015;
-			
 			// aapt resource value: 0x7f0c0041
 			public const int design_bottom_navigation_shadow_color = 2131492929;
 			
@@ -2414,8 +2122,8 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c0043
 			public const int design_default_color_primary_dark = 2131492931;
 			
-			// aapt resource value: 0x7f0c0193
-			public const int design_error = 2131493267;
+			// aapt resource value: 0x7f0c0075
+			public const int design_error = 2131492981;
 			
 			// aapt resource value: 0x7f0c0044
 			public const int design_fab_shadow_end_color = 2131492932;
@@ -2441,8 +2149,8 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c004b
 			public const int design_snackbar_background_color = 2131492939;
 			
-			// aapt resource value: 0x7f0c0194
-			public const int design_tint_password_toggle = 2131493268;
+			// aapt resource value: 0x7f0c0076
+			public const int design_tint_password_toggle = 2131492982;
 			
 			// aapt resource value: 0x7f0c0016
 			public const int dim_foreground_disabled_material_dark = 2131492886;
@@ -2468,290 +2176,14 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c001d
 			public const int foreground_material_light = 2131492893;
 			
-			// aapt resource value: 0x7f0c00a7
-			public const int green_100 = 2131493031;
-			
-			// aapt resource value: 0x7f0c00a8
-			public const int green_200 = 2131493032;
-			
-			// aapt resource value: 0x7f0c00a9
-			public const int green_300 = 2131493033;
-			
-			// aapt resource value: 0x7f0c00aa
-			public const int green_400 = 2131493034;
-			
-			// aapt resource value: 0x7f0c00a6
-			public const int green_50 = 2131493030;
-			
-			// aapt resource value: 0x7f0c00ab
-			public const int green_500 = 2131493035;
-			
-			// aapt resource value: 0x7f0c00ac
-			public const int green_600 = 2131493036;
-			
-			// aapt resource value: 0x7f0c00ad
-			public const int green_700 = 2131493037;
-			
-			// aapt resource value: 0x7f0c00ae
-			public const int green_800 = 2131493038;
-			
-			// aapt resource value: 0x7f0c00af
-			public const int green_900 = 2131493039;
-			
-			// aapt resource value: 0x7f0c00b0
-			public const int green_A100 = 2131493040;
-			
-			// aapt resource value: 0x7f0c00b1
-			public const int green_A200 = 2131493041;
-			
-			// aapt resource value: 0x7f0c00b2
-			public const int green_A400 = 2131493042;
-			
-			// aapt resource value: 0x7f0c00b3
-			public const int green_A700 = 2131493043;
-			
-			// aapt resource value: 0x7f0c0074
-			public const int grey_10 = 2131492980;
-			
-			// aapt resource value: 0x7f0c0174
-			public const int grey_100 = 2131493236;
-			
-			// aapt resource value: 0x7f0c017d
-			public const int grey_1000 = 2131493245;
-			
-			// aapt resource value: 0x7f0c007b
-			public const int grey_100_ = 2131492987;
-			
-			// aapt resource value: 0x7f0c0075
-			public const int grey_20 = 2131492981;
-			
-			// aapt resource value: 0x7f0c0175
-			public const int grey_200 = 2131493237;
-			
-			// aapt resource value: 0x7f0c0072
-			public const int grey_3 = 2131492978;
-			
-			// aapt resource value: 0x7f0c0176
-			public const int grey_300 = 2131493238;
-			
-			// aapt resource value: 0x7f0c0076
-			public const int grey_40 = 2131492982;
-			
-			// aapt resource value: 0x7f0c0177
-			public const int grey_400 = 2131493239;
-			
-			// aapt resource value: 0x7f0c0073
-			public const int grey_5 = 2131492979;
-			
-			// aapt resource value: 0x7f0c0173
-			public const int grey_50 = 2131493235;
-			
-			// aapt resource value: 0x7f0c0178
-			public const int grey_500 = 2131493240;
-			
-			// aapt resource value: 0x7f0c0077
-			public const int grey_60 = 2131492983;
-			
-			// aapt resource value: 0x7f0c0179
-			public const int grey_600 = 2131493241;
-			
-			// aapt resource value: 0x7f0c017a
-			public const int grey_700 = 2131493242;
-			
-			// aapt resource value: 0x7f0c0078
-			public const int grey_80 = 2131492984;
-			
-			// aapt resource value: 0x7f0c017b
-			public const int grey_800 = 2131493243;
-			
-			// aapt resource value: 0x7f0c0079
-			public const int grey_90 = 2131492985;
-			
-			// aapt resource value: 0x7f0c017c
-			public const int grey_900 = 2131493244;
-			
-			// aapt resource value: 0x7f0c007a
-			public const int grey_95 = 2131492986;
-			
 			// aapt resource value: 0x7f0c001e
 			public const int highlighted_text_material_dark = 2131492894;
 			
 			// aapt resource value: 0x7f0c001f
 			public const int highlighted_text_material_light = 2131492895;
 			
-			// aapt resource value: 0x7f0c017e
-			public const int ic_launcher_background = 2131493246;
-			
-			// aapt resource value: 0x7f0c00ea
-			public const int indigo_100 = 2131493098;
-			
-			// aapt resource value: 0x7f0c00eb
-			public const int indigo_200 = 2131493099;
-			
-			// aapt resource value: 0x7f0c00ec
-			public const int indigo_300 = 2131493100;
-			
-			// aapt resource value: 0x7f0c00ed
-			public const int indigo_400 = 2131493101;
-			
-			// aapt resource value: 0x7f0c00e9
-			public const int indigo_50 = 2131493097;
-			
-			// aapt resource value: 0x7f0c00ee
-			public const int indigo_500 = 2131493102;
-			
-			// aapt resource value: 0x7f0c00ef
-			public const int indigo_600 = 2131493103;
-			
-			// aapt resource value: 0x7f0c00f0
-			public const int indigo_700 = 2131493104;
-			
-			// aapt resource value: 0x7f0c00f1
-			public const int indigo_800 = 2131493105;
-			
-			// aapt resource value: 0x7f0c00f7
-			public const int indigo_800_overlay = 2131493111;
-			
-			// aapt resource value: 0x7f0c00f2
-			public const int indigo_900 = 2131493106;
-			
-			// aapt resource value: 0x7f0c00f3
-			public const int indigo_A100 = 2131493107;
-			
-			// aapt resource value: 0x7f0c00f4
-			public const int indigo_A200 = 2131493108;
-			
-			// aapt resource value: 0x7f0c00f5
-			public const int indigo_A400 = 2131493109;
-			
-			// aapt resource value: 0x7f0c00f6
-			public const int indigo_A700 = 2131493110;
-			
-			// aapt resource value: 0x7f0c0099
-			public const int light_blue_100 = 2131493017;
-			
-			// aapt resource value: 0x7f0c009a
-			public const int light_blue_200 = 2131493018;
-			
-			// aapt resource value: 0x7f0c009b
-			public const int light_blue_300 = 2131493019;
-			
-			// aapt resource value: 0x7f0c009c
-			public const int light_blue_400 = 2131493020;
-			
-			// aapt resource value: 0x7f0c0098
-			public const int light_blue_50 = 2131493016;
-			
-			// aapt resource value: 0x7f0c009d
-			public const int light_blue_500 = 2131493021;
-			
-			// aapt resource value: 0x7f0c009e
-			public const int light_blue_600 = 2131493022;
-			
-			// aapt resource value: 0x7f0c009f
-			public const int light_blue_700 = 2131493023;
-			
-			// aapt resource value: 0x7f0c00a0
-			public const int light_blue_800 = 2131493024;
-			
-			// aapt resource value: 0x7f0c00a1
-			public const int light_blue_900 = 2131493025;
-			
-			// aapt resource value: 0x7f0c00a2
-			public const int light_blue_A100 = 2131493026;
-			
-			// aapt resource value: 0x7f0c00a3
-			public const int light_blue_A200 = 2131493027;
-			
-			// aapt resource value: 0x7f0c00a4
-			public const int light_blue_A400 = 2131493028;
-			
-			// aapt resource value: 0x7f0c00a5
-			public const int light_blue_A700 = 2131493029;
-			
-			// aapt resource value: 0x7f0c0108
-			public const int light_green_100 = 2131493128;
-			
-			// aapt resource value: 0x7f0c0109
-			public const int light_green_200 = 2131493129;
-			
-			// aapt resource value: 0x7f0c010a
-			public const int light_green_300 = 2131493130;
-			
-			// aapt resource value: 0x7f0c010b
-			public const int light_green_400 = 2131493131;
-			
-			// aapt resource value: 0x7f0c0107
-			public const int light_green_50 = 2131493127;
-			
-			// aapt resource value: 0x7f0c010c
-			public const int light_green_500 = 2131493132;
-			
-			// aapt resource value: 0x7f0c010d
-			public const int light_green_600 = 2131493133;
-			
-			// aapt resource value: 0x7f0c010e
-			public const int light_green_700 = 2131493134;
-			
-			// aapt resource value: 0x7f0c010f
-			public const int light_green_800 = 2131493135;
-			
-			// aapt resource value: 0x7f0c0110
-			public const int light_green_900 = 2131493136;
-			
-			// aapt resource value: 0x7f0c0111
-			public const int light_green_A100 = 2131493137;
-			
-			// aapt resource value: 0x7f0c0112
-			public const int light_green_A200 = 2131493138;
-			
-			// aapt resource value: 0x7f0c0113
-			public const int light_green_A400 = 2131493139;
-			
-			// aapt resource value: 0x7f0c0114
-			public const int light_green_A700 = 2131493140;
-			
-			// aapt resource value: 0x7f0c0158
-			public const int lime_100 = 2131493208;
-			
-			// aapt resource value: 0x7f0c0159
-			public const int lime_200 = 2131493209;
-			
-			// aapt resource value: 0x7f0c015a
-			public const int lime_300 = 2131493210;
-			
-			// aapt resource value: 0x7f0c015b
-			public const int lime_400 = 2131493211;
-			
-			// aapt resource value: 0x7f0c0157
-			public const int lime_50 = 2131493207;
-			
-			// aapt resource value: 0x7f0c015c
-			public const int lime_500 = 2131493212;
-			
-			// aapt resource value: 0x7f0c015d
-			public const int lime_600 = 2131493213;
-			
-			// aapt resource value: 0x7f0c015e
-			public const int lime_700 = 2131493214;
-			
-			// aapt resource value: 0x7f0c015f
-			public const int lime_800 = 2131493215;
-			
-			// aapt resource value: 0x7f0c0160
-			public const int lime_900 = 2131493216;
-			
-			// aapt resource value: 0x7f0c0161
-			public const int lime_A100 = 2131493217;
-			
-			// aapt resource value: 0x7f0c0162
-			public const int lime_A200 = 2131493218;
-			
-			// aapt resource value: 0x7f0c0163
-			public const int lime_A400 = 2131493219;
-			
-			// aapt resource value: 0x7f0c0164
-			public const int lime_A700 = 2131493220;
+			// aapt resource value: 0x7f0c0060
+			public const int ic_launcher_background = 2131492960;
 			
 			// aapt resource value: 0x7f0c0020
 			public const int material_blue_grey_800 = 2131492896;
@@ -2789,71 +2221,71 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c002b
 			public const int material_grey_900 = 2131492907;
 			
-			// aapt resource value: 0x7f0c0195
-			public const int mtrl_bottom_nav_colored_item_tint = 2131493269;
+			// aapt resource value: 0x7f0c0077
+			public const int mtrl_bottom_nav_colored_item_tint = 2131492983;
 			
-			// aapt resource value: 0x7f0c0196
-			public const int mtrl_bottom_nav_item_tint = 2131493270;
+			// aapt resource value: 0x7f0c0078
+			public const int mtrl_bottom_nav_item_tint = 2131492984;
 			
 			// aapt resource value: 0x7f0c004c
 			public const int mtrl_btn_bg_color_disabled = 2131492940;
 			
-			// aapt resource value: 0x7f0c0197
-			public const int mtrl_btn_bg_color_selector = 2131493271;
+			// aapt resource value: 0x7f0c0079
+			public const int mtrl_btn_bg_color_selector = 2131492985;
 			
-			// aapt resource value: 0x7f0c0198
-			public const int mtrl_btn_ripple_color = 2131493272;
+			// aapt resource value: 0x7f0c007a
+			public const int mtrl_btn_ripple_color = 2131492986;
 			
-			// aapt resource value: 0x7f0c0199
-			public const int mtrl_btn_stroke_color_selector = 2131493273;
+			// aapt resource value: 0x7f0c007b
+			public const int mtrl_btn_stroke_color_selector = 2131492987;
 			
-			// aapt resource value: 0x7f0c019a
-			public const int mtrl_btn_text_btn_ripple_color = 2131493274;
+			// aapt resource value: 0x7f0c007c
+			public const int mtrl_btn_text_btn_ripple_color = 2131492988;
 			
 			// aapt resource value: 0x7f0c004d
 			public const int mtrl_btn_text_color_disabled = 2131492941;
 			
-			// aapt resource value: 0x7f0c019b
-			public const int mtrl_btn_text_color_selector = 2131493275;
+			// aapt resource value: 0x7f0c007d
+			public const int mtrl_btn_text_color_selector = 2131492989;
 			
 			// aapt resource value: 0x7f0c004e
 			public const int mtrl_btn_transparent_bg_color = 2131492942;
 			
-			// aapt resource value: 0x7f0c019c
-			public const int mtrl_chip_background_color = 2131493276;
+			// aapt resource value: 0x7f0c007e
+			public const int mtrl_chip_background_color = 2131492990;
 			
-			// aapt resource value: 0x7f0c019d
-			public const int mtrl_chip_close_icon_tint = 2131493277;
+			// aapt resource value: 0x7f0c007f
+			public const int mtrl_chip_close_icon_tint = 2131492991;
 			
-			// aapt resource value: 0x7f0c019e
-			public const int mtrl_chip_ripple_color = 2131493278;
+			// aapt resource value: 0x7f0c0080
+			public const int mtrl_chip_ripple_color = 2131492992;
 			
-			// aapt resource value: 0x7f0c019f
-			public const int mtrl_chip_text_color = 2131493279;
+			// aapt resource value: 0x7f0c0081
+			public const int mtrl_chip_text_color = 2131492993;
 			
-			// aapt resource value: 0x7f0c01a0
-			public const int mtrl_fab_ripple_color = 2131493280;
+			// aapt resource value: 0x7f0c0082
+			public const int mtrl_fab_ripple_color = 2131492994;
 			
 			// aapt resource value: 0x7f0c004f
 			public const int mtrl_scrim_color = 2131492943;
 			
-			// aapt resource value: 0x7f0c01a1
-			public const int mtrl_tabs_colored_ripple_color = 2131493281;
+			// aapt resource value: 0x7f0c0083
+			public const int mtrl_tabs_colored_ripple_color = 2131492995;
 			
-			// aapt resource value: 0x7f0c01a2
-			public const int mtrl_tabs_icon_color_selector = 2131493282;
+			// aapt resource value: 0x7f0c0084
+			public const int mtrl_tabs_icon_color_selector = 2131492996;
 			
-			// aapt resource value: 0x7f0c01a3
-			public const int mtrl_tabs_icon_color_selector_colored = 2131493283;
+			// aapt resource value: 0x7f0c0085
+			public const int mtrl_tabs_icon_color_selector_colored = 2131492997;
 			
-			// aapt resource value: 0x7f0c01a4
-			public const int mtrl_tabs_legacy_text_color_selector = 2131493284;
+			// aapt resource value: 0x7f0c0086
+			public const int mtrl_tabs_legacy_text_color_selector = 2131492998;
 			
-			// aapt resource value: 0x7f0c01a5
-			public const int mtrl_tabs_ripple_color = 2131493285;
+			// aapt resource value: 0x7f0c0087
+			public const int mtrl_tabs_ripple_color = 2131492999;
 			
-			// aapt resource value: 0x7f0c01a6
-			public const int mtrl_text_btn_text_color_selector = 2131493286;
+			// aapt resource value: 0x7f0c0088
+			public const int mtrl_text_btn_text_color_selector = 2131493000;
 			
 			// aapt resource value: 0x7f0c0050
 			public const int mtrl_textinput_default_box_stroke_color = 2131492944;
@@ -2875,144 +2307,6 @@ namespace MonkeyFinder.Droid
 			
 			// aapt resource value: 0x7f0c0040
 			public const int notification_material_background_media_default_color = 2131492928;
-			
-			// aapt resource value: 0x7f0c0166
-			public const int orange_100 = 2131493222;
-			
-			// aapt resource value: 0x7f0c0167
-			public const int orange_200 = 2131493223;
-			
-			// aapt resource value: 0x7f0c0168
-			public const int orange_300 = 2131493224;
-			
-			// aapt resource value: 0x7f0c0169
-			public const int orange_400 = 2131493225;
-			
-			// aapt resource value: 0x7f0c0165
-			public const int orange_50 = 2131493221;
-			
-			// aapt resource value: 0x7f0c016a
-			public const int orange_500 = 2131493226;
-			
-			// aapt resource value: 0x7f0c016b
-			public const int orange_600 = 2131493227;
-			
-			// aapt resource value: 0x7f0c016c
-			public const int orange_700 = 2131493228;
-			
-			// aapt resource value: 0x7f0c016d
-			public const int orange_800 = 2131493229;
-			
-			// aapt resource value: 0x7f0c016e
-			public const int orange_900 = 2131493230;
-			
-			// aapt resource value: 0x7f0c016f
-			public const int orange_A100 = 2131493231;
-			
-			// aapt resource value: 0x7f0c0170
-			public const int orange_A200 = 2131493232;
-			
-			// aapt resource value: 0x7f0c0171
-			public const int orange_A400 = 2131493233;
-			
-			// aapt resource value: 0x7f0c0172
-			public const int orange_A700 = 2131493234;
-			
-			// aapt resource value: 0x7f0c0060
-			public const int overlay_dark_10 = 2131492960;
-			
-			// aapt resource value: 0x7f0c0061
-			public const int overlay_dark_20 = 2131492961;
-			
-			// aapt resource value: 0x7f0c0062
-			public const int overlay_dark_30 = 2131492962;
-			
-			// aapt resource value: 0x7f0c0063
-			public const int overlay_dark_40 = 2131492963;
-			
-			// aapt resource value: 0x7f0c0064
-			public const int overlay_dark_50 = 2131492964;
-			
-			// aapt resource value: 0x7f0c0065
-			public const int overlay_dark_60 = 2131492965;
-			
-			// aapt resource value: 0x7f0c0066
-			public const int overlay_dark_70 = 2131492966;
-			
-			// aapt resource value: 0x7f0c0067
-			public const int overlay_dark_80 = 2131492967;
-			
-			// aapt resource value: 0x7f0c0068
-			public const int overlay_dark_90 = 2131492968;
-			
-			// aapt resource value: 0x7f0c0069
-			public const int overlay_light_10 = 2131492969;
-			
-			// aapt resource value: 0x7f0c006a
-			public const int overlay_light_20 = 2131492970;
-			
-			// aapt resource value: 0x7f0c006b
-			public const int overlay_light_30 = 2131492971;
-			
-			// aapt resource value: 0x7f0c006c
-			public const int overlay_light_40 = 2131492972;
-			
-			// aapt resource value: 0x7f0c006d
-			public const int overlay_light_50 = 2131492973;
-			
-			// aapt resource value: 0x7f0c006e
-			public const int overlay_light_60 = 2131492974;
-			
-			// aapt resource value: 0x7f0c006f
-			public const int overlay_light_70 = 2131492975;
-			
-			// aapt resource value: 0x7f0c0070
-			public const int overlay_light_80 = 2131492976;
-			
-			// aapt resource value: 0x7f0c0071
-			public const int overlay_light_90 = 2131492977;
-			
-			// aapt resource value: 0x7f0c00dc
-			public const int pink_100 = 2131493084;
-			
-			// aapt resource value: 0x7f0c00dd
-			public const int pink_200 = 2131493085;
-			
-			// aapt resource value: 0x7f0c00de
-			public const int pink_300 = 2131493086;
-			
-			// aapt resource value: 0x7f0c00df
-			public const int pink_400 = 2131493087;
-			
-			// aapt resource value: 0x7f0c00db
-			public const int pink_50 = 2131493083;
-			
-			// aapt resource value: 0x7f0c00e0
-			public const int pink_500 = 2131493088;
-			
-			// aapt resource value: 0x7f0c00e1
-			public const int pink_600 = 2131493089;
-			
-			// aapt resource value: 0x7f0c00e2
-			public const int pink_700 = 2131493090;
-			
-			// aapt resource value: 0x7f0c00e3
-			public const int pink_800 = 2131493091;
-			
-			// aapt resource value: 0x7f0c00e4
-			public const int pink_900 = 2131493092;
-			
-			// aapt resource value: 0x7f0c00e5
-			public const int pink_A100 = 2131493093;
-			
-			// aapt resource value: 0x7f0c00e6
-			public const int pink_A200 = 2131493094;
-			
-			// aapt resource value: 0x7f0c00e7
-			public const int pink_A400 = 2131493095;
-			
-			// aapt resource value: 0x7f0c00e8
-			public const int pink_A700 = 2131493096;
 			
 			// aapt resource value: 0x7f0c002c
 			public const int primary_dark_material_dark = 2131492908;
@@ -3038,90 +2332,6 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c0033
 			public const int primary_text_disabled_material_light = 2131492915;
 			
-			// aapt resource value: 0x7f0c012e
-			public const int purple_100 = 2131493166;
-			
-			// aapt resource value: 0x7f0c012f
-			public const int purple_200 = 2131493167;
-			
-			// aapt resource value: 0x7f0c0130
-			public const int purple_300 = 2131493168;
-			
-			// aapt resource value: 0x7f0c0131
-			public const int purple_400 = 2131493169;
-			
-			// aapt resource value: 0x7f0c012d
-			public const int purple_50 = 2131493165;
-			
-			// aapt resource value: 0x7f0c0132
-			public const int purple_500 = 2131493170;
-			
-			// aapt resource value: 0x7f0c0133
-			public const int purple_600 = 2131493171;
-			
-			// aapt resource value: 0x7f0c0134
-			public const int purple_700 = 2131493172;
-			
-			// aapt resource value: 0x7f0c0135
-			public const int purple_800 = 2131493173;
-			
-			// aapt resource value: 0x7f0c0136
-			public const int purple_900 = 2131493174;
-			
-			// aapt resource value: 0x7f0c0137
-			public const int purple_A100 = 2131493175;
-			
-			// aapt resource value: 0x7f0c0138
-			public const int purple_A200 = 2131493176;
-			
-			// aapt resource value: 0x7f0c0139
-			public const int purple_A400 = 2131493177;
-			
-			// aapt resource value: 0x7f0c013a
-			public const int purple_A700 = 2131493178;
-			
-			// aapt resource value: 0x7f0c007d
-			public const int red_100 = 2131492989;
-			
-			// aapt resource value: 0x7f0c007e
-			public const int red_200 = 2131492990;
-			
-			// aapt resource value: 0x7f0c007f
-			public const int red_300 = 2131492991;
-			
-			// aapt resource value: 0x7f0c0080
-			public const int red_400 = 2131492992;
-			
-			// aapt resource value: 0x7f0c007c
-			public const int red_50 = 2131492988;
-			
-			// aapt resource value: 0x7f0c0081
-			public const int red_500 = 2131492993;
-			
-			// aapt resource value: 0x7f0c0082
-			public const int red_600 = 2131492994;
-			
-			// aapt resource value: 0x7f0c0083
-			public const int red_700 = 2131492995;
-			
-			// aapt resource value: 0x7f0c0084
-			public const int red_800 = 2131492996;
-			
-			// aapt resource value: 0x7f0c0085
-			public const int red_900 = 2131492997;
-			
-			// aapt resource value: 0x7f0c0086
-			public const int red_A100 = 2131492998;
-			
-			// aapt resource value: 0x7f0c0087
-			public const int red_A200 = 2131492999;
-			
-			// aapt resource value: 0x7f0c0088
-			public const int red_A400 = 2131493000;
-			
-			// aapt resource value: 0x7f0c0089
-			public const int red_A700 = 2131493001;
-			
 			// aapt resource value: 0x7f0c0034
 			public const int ripple_material_dark = 2131492916;
 			
@@ -3146,11 +2356,11 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c003b
 			public const int switch_thumb_disabled_material_light = 2131492923;
 			
-			// aapt resource value: 0x7f0c01a7
-			public const int switch_thumb_material_dark = 2131493287;
+			// aapt resource value: 0x7f0c0089
+			public const int switch_thumb_material_dark = 2131493001;
 			
-			// aapt resource value: 0x7f0c01a8
-			public const int switch_thumb_material_light = 2131493288;
+			// aapt resource value: 0x7f0c008a
+			public const int switch_thumb_material_light = 2131493002;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int switch_thumb_normal_material_dark = 2131492924;
@@ -3158,95 +2368,11 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0c003d
 			public const int switch_thumb_normal_material_light = 2131492925;
 			
-			// aapt resource value: 0x7f0c014a
-			public const int teal_100 = 2131493194;
-			
-			// aapt resource value: 0x7f0c014b
-			public const int teal_200 = 2131493195;
-			
-			// aapt resource value: 0x7f0c014c
-			public const int teal_300 = 2131493196;
-			
-			// aapt resource value: 0x7f0c014d
-			public const int teal_400 = 2131493197;
-			
-			// aapt resource value: 0x7f0c0149
-			public const int teal_50 = 2131493193;
-			
-			// aapt resource value: 0x7f0c014e
-			public const int teal_500 = 2131493198;
-			
-			// aapt resource value: 0x7f0c014f
-			public const int teal_600 = 2131493199;
-			
-			// aapt resource value: 0x7f0c0150
-			public const int teal_700 = 2131493200;
-			
-			// aapt resource value: 0x7f0c0151
-			public const int teal_800 = 2131493201;
-			
-			// aapt resource value: 0x7f0c0152
-			public const int teal_900 = 2131493202;
-			
-			// aapt resource value: 0x7f0c0153
-			public const int teal_A100 = 2131493203;
-			
-			// aapt resource value: 0x7f0c0154
-			public const int teal_A200 = 2131493204;
-			
-			// aapt resource value: 0x7f0c0155
-			public const int teal_A400 = 2131493205;
-			
-			// aapt resource value: 0x7f0c0156
-			public const int teal_A700 = 2131493206;
-			
 			// aapt resource value: 0x7f0c003e
 			public const int tooltip_background_dark = 2131492926;
 			
 			// aapt resource value: 0x7f0c003f
 			public const int tooltip_background_light = 2131492927;
-			
-			// aapt resource value: 0x7f0c00b5
-			public const int yellow_100 = 2131493045;
-			
-			// aapt resource value: 0x7f0c00b6
-			public const int yellow_200 = 2131493046;
-			
-			// aapt resource value: 0x7f0c00b7
-			public const int yellow_300 = 2131493047;
-			
-			// aapt resource value: 0x7f0c00b8
-			public const int yellow_400 = 2131493048;
-			
-			// aapt resource value: 0x7f0c00b4
-			public const int yellow_50 = 2131493044;
-			
-			// aapt resource value: 0x7f0c00b9
-			public const int yellow_500 = 2131493049;
-			
-			// aapt resource value: 0x7f0c00ba
-			public const int yellow_600 = 2131493050;
-			
-			// aapt resource value: 0x7f0c00bb
-			public const int yellow_700 = 2131493051;
-			
-			// aapt resource value: 0x7f0c00bc
-			public const int yellow_800 = 2131493052;
-			
-			// aapt resource value: 0x7f0c00bd
-			public const int yellow_900 = 2131493053;
-			
-			// aapt resource value: 0x7f0c00be
-			public const int yellow_A100 = 2131493054;
-			
-			// aapt resource value: 0x7f0c00bf
-			public const int yellow_A200 = 2131493055;
-			
-			// aapt resource value: 0x7f0c00c0
-			public const int yellow_A400 = 2131493056;
-			
-			// aapt resource value: 0x7f0c00c1
-			public const int yellow_A700 = 2131493057;
 			
 			static Color()
 			{
@@ -3486,18 +2612,6 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f09000c
 			public const int abc_text_size_title_material_toolbar = 2131296268;
 			
-			// aapt resource value: 0x7f0900dd
-			public const int actionBarSize = 2131296477;
-			
-			// aapt resource value: 0x7f0900de
-			public const int activity_horizontal_margin = 2131296478;
-			
-			// aapt resource value: 0x7f0900df
-			public const int activity_vertical_margin = 2131296479;
-			
-			// aapt resource value: 0x7f0900f2
-			public const int appbar_padding_top = 2131296498;
-			
 			// aapt resource value: 0x7f0900c5
 			public const int browser_actions_context_menu_max_width = 2131296453;
 			
@@ -3671,9 +2785,6 @@ namespace MonkeyFinder.Droid
 			
 			// aapt resource value: 0x7f090055
 			public const int disabled_alpha_material_light = 2131296341;
-			
-			// aapt resource value: 0x7f0900e2
-			public const int fab_margin = 2131296482;
 			
 			// aapt resource value: 0x7f090000
 			public const int fastscroll_default_thickness = 2131296256;
@@ -3858,12 +2969,6 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0900c4
 			public const int mtrl_toolbar_default_height = 2131296452;
 			
-			// aapt resource value: 0x7f0900e1
-			public const int nav_header_height = 2131296481;
-			
-			// aapt resource value: 0x7f0900e0
-			public const int nav_header_vertical_spacing = 2131296480;
-			
 			// aapt resource value: 0x7f0900d2
 			public const int notification_action_icon_size = 2131296466;
 			
@@ -3909,45 +3014,6 @@ namespace MonkeyFinder.Droid
 			// aapt resource value: 0x7f0900dc
 			public const int notification_top_pad_large_text = 2131296476;
 			
-			// aapt resource value: 0x7f0900ea
-			public const int spacing_large = 2131296490;
-			
-			// aapt resource value: 0x7f0900e7
-			public const int spacing_medium = 2131296487;
-			
-			// aapt resource value: 0x7f0900e9
-			public const int spacing_middle = 2131296489;
-			
-			// aapt resource value: 0x7f0900ec
-			public const int spacing_mlarge = 2131296492;
-			
-			// aapt resource value: 0x7f0900ed
-			public const int spacing_mxlarge = 2131296493;
-			
-			// aapt resource value: 0x7f0900e6
-			public const int spacing_small = 2131296486;
-			
-			// aapt resource value: 0x7f0900eb
-			public const int spacing_smlarge = 2131296491;
-			
-			// aapt resource value: 0x7f0900ee
-			public const int spacing_xlarge = 2131296494;
-			
-			// aapt resource value: 0x7f0900e8
-			public const int spacing_xmedium = 2131296488;
-			
-			// aapt resource value: 0x7f0900ef
-			public const int spacing_xmlarge = 2131296495;
-			
-			// aapt resource value: 0x7f0900e5
-			public const int spacing_xsmall = 2131296485;
-			
-			// aapt resource value: 0x7f0900f0
-			public const int spacing_xxlarge = 2131296496;
-			
-			// aapt resource value: 0x7f0900f1
-			public const int spacing_xxxlarge = 2131296497;
-			
 			// aapt resource value: 0x7f090065
 			public const int subtitle_corner_radius = 2131296357;
 			
@@ -3983,12 +3049,6 @@ namespace MonkeyFinder.Droid
 			
 			// aapt resource value: 0x7f090064
 			public const int tooltip_y_offset_touch = 2131296356;
-			
-			// aapt resource value: 0x7f0900e3
-			public const int viewpager_margin_overlap = 2131296483;
-			
-			// aapt resource value: 0x7f0900e4
-			public const int viewpager_margin_overlap_payment = 2131296484;
 			
 			static Dimension()
 			{

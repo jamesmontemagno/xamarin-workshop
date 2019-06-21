@@ -23,12 +23,10 @@ namespace MonkeyFinder.ViewModel
 
         }
 
-    
         public async Task GetMonkeysAsync()
         {
             try
             {
-
                 var json = await Client.GetStringAsync("https://montemagno.com/monkeys.json");
                 var monkeys =  Monkey.FromJson(json);
 
@@ -39,7 +37,6 @@ namespace MonkeyFinder.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
-                //await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
             }
             finally
             {
@@ -63,15 +60,10 @@ namespace MonkeyFinder.ViewModel
                 var first = Monkeys.OrderBy(m => location.CalculateDistance(
                     new Location(m.Latitude, m.Longitude), DistanceUnits.Miles))
                     .FirstOrDefault();
-
-                //await Application.Current.MainPage.DisplayAlert("", first.Name + " " +
-                //    first.Location, "OK");
-
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to query location: {ex.Message}");
-                //await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
             }
         }
 
