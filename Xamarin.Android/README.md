@@ -1,6 +1,6 @@
 # Xamarin Monkeys - Hands On Lab
 
-Today we will build a cloud connected [Xamarin.Forms](https://docs.microsoft.com/xamarin/) application that will display a list of Monkeys from around the world. We will start by building the business logic backend that pulls down json-ecoded data from a RESTful endpoint. We will then leverage [Xamarin.Essentials](https://docs.microsoft.com/xamarin/essentials/index) to find the closest monkey to us and also show the monkey on a map. Finally, we will connect it to an Azure backend leveraging [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) and [Azure Functions](https://azure.microsoft.com/en-us/services/functions/) in just a few lines of code.
+Today we will build a cloud connected [Xamarin.Android](https://docs.microsoft.com/xamarin/) application that will display a list of Monkeys from around the world. We will start by building the business logic backend that pulls down json-ecoded data from a RESTful endpoint. We will then leverage [Xamarin.Essentials](https://docs.microsoft.com/xamarin/essentials/index) to find the closest monkey to us and also show the monkey on a map. Finally, we will connect it to an Azure backend leveraging [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) and [Azure Functions](https://azure.microsoft.com/en-us/services/functions/) in just a few lines of code.
 
 ## Setup Guide
 Follow our simple [setup guide](https://github.com/xamarin/dev-days-labs/raw/master/Xamarin%20Workshop%20Setup.pdf) to ensure you have Visual Studio and Xamarin setup and ready to deploy.
@@ -11,16 +11,14 @@ Follow our simple [setup guide](https://github.com/xamarin/dev-days-labs/raw/mas
 
 1. Open **Start/MonkeyFinder.sln**
 
-This MonkeyFinder contains 4 projects
+This MonkeyFinder contains 2 projects
 
-* MonkeyFinder  - Shared .NET Standard project that will have all shared code (model, views, view models, and services)
+* MonkeyFinder  - Shared .NET Standard project that will have all shared code (model, view models, and services)
 * MonkeyFinder.Droid - Xamarin.Android application
-* MonkeyFinder.iOS - Xamarin.iOS application (requires a macOS build host)
-* MonkeyFinder.UWP - Windows 10 UWP application (requires Visual Studio /2017 on Windows 10)
 
 ![Solution](Art/Solution.PNG)
 
-The **MonkeyFinder** project also has blank code files and XAML pages that we will use during the Hands on Lab. All of the code that we modify will be in this project for the workshop.
+The **MonkeyFinder** project also has blank code files that we will use during the Hands on Lab. All of the code that we modify will be in this project or the **MonkeyFinder.Droid** project for the workshop.
 
 ### 2. NuGet Restore
 
@@ -90,132 +88,7 @@ internal static class Converter
 }
 ```
 
-### 4. Implementing INotifyPropertyChanged
-
-*INotifyPropertyChanged* is important for data binding in MVVM Frameworks. This is an interface that, when implemented, lets our view know about changes to the model. We will implement it once in our `BaseViewModel` so all other view models that we can create can inherit from it.
-
-1. In Visual Studio, open `ViewModel/BaseViewModel.cs`
-2. In `BaseViewModel.cs`, implement INotifyPropertyChanged by changing this
-
-```csharp
-public class BaseViewModel
-{
-
-}
-```
-
-to this
-
-```csharp
-public class BaseViewModel : INotifyPropertyChanged
-{
-
-}
-```
-
-3. In `BaseViewModel.cs`, right click on `INotifyPropertyChanged`
-4. Implement the `INotifyPropertyChanged` Interface
-   - (Visual Studio Mac) In the right-click menu, select Quick Fix -> Implement Interface
-   - (Visual Studio PC) In the right-click menu, select Quick Actions and Refactorings -> Implement Interface
-5. In `BaseViewModel.cs`, ensure this line of code now appears:
-
-```csharp
-public event PropertyChangedEventHandler PropertyChanged;
-```
-
-6. In `BaseViewModel.cs`, create a new method called `OnPropertyChanged`
-    - Note: We will call `OnPropertyChanged` whenever a property updates
-
-```csharp
-private void OnPropertyChanged([CallerMemberName] string name = null)
-{
-
-}
-```
-
-7. Add code to `OnPropertyChanged`:
-
-```csharp
-private void OnPropertyChanged([CallerMemberName] string name = null) =>
-    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-```
-
-### 5. Implementing Title, IsBusy, and IsNotBusy
-
-We will create a backing field and accessors for a few properties. These properties will allow us to set the title on our pages and also let our view know that our view model is busy so we don't perform duplicate operations (like allowing the user to refresh the data multiple times). They are in the `BaseViewModel` because they are common for every page.
-
-1. In `BaseViewModel.cs`, create the backing field:
-
-```csharp
-public class BaseViewModel : INotifyPropertyChanged
-{
-    bool isBusy;
-    string title;
-    //...
-}
-```
-
-2. Create the properties:
-
-```csharp
-public class SpeakersViewModel : INotifyPropertyChanged
-{
-    //...
-     public bool IsBusy
-    {
-        get => isBusy;
-        set
-        {
-            if (isBusy == value)
-                return;
-            isBusy = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string Title
-    {
-        get => title;
-        set
-        {
-            if (title == value)
-                return;
-            title = value;
-            OnPropertyChanged();
-        }
-    }
-    //...
-}
-```
-
-Notice that we call `OnPropertyChanged` when the value changes. The Xamarin.Forms binding infrastructure will subscribe to our **PropertyChanged** event so the UI will be notified of the change.
-
-We can also create the inverse of `IsBusy` by creating another property called `IsNotBusy` that returns the opposite of `IsBusy` and then raising the event of `OnPropertyChanged` when we set `IsBusy`
-
-```csharp
-public class SpeakersViewModel : INotifyPropertyChanged
-{
-    //...
-    public bool IsBusy
-    {
-        get => isBusy;
-        set
-        {
-            if (isBusy == value)
-                return;
-            isBusy = value;
-            OnPropertyChanged();
-            // Also raise the IsNotBusy property changed
-            OnPropertyChanged(nameof(IsNotBusy));
-        }
-    } 
-
-    public bool IsNotBusy => !IsBusy;
-    //...
-}
-```
-
-### 6. Creating our Data Service
+### 4. Creating our Data Service
 
 Inside our our `Services` folder lives two files that represent an interface contract (`IDataService`) for getting the data and an implementation that we will fill in (`WebDataService`).
 
@@ -285,39 +158,26 @@ public async Task<IEnumerable<Monkey>> GetMonkeysAsync()
 }
 ```
 
-Note that in this file is a line of a code above the namespace `[assembly:Dependency(typeof(WebDataService))]`. This is the Xamarin.Forms dependency service which will automatically register this class and it's interface that we can retrieve a global instance of later.
+### 5. Create ObservableCollection of Monkeys
 
-4. Let's end by ensuring we have reference at any time to this implementation by retrieving it in our `BaseViewModel` by adding the following code in the class:
-
-```csharp
-public IDataService DataService { get; }
-public BaseViewModel()
-{
-    DataService = DependencyService.Get<IDataService>();
-}
-```
-
-### 6. Create ObservableCollection of Monkeys
-
-We will use an `ObservableCollection<Monkey>` that will be cleared and then loaded with **Monkey** objects. We use an `ObservableCollection` because it has built-in support to raise `CollectionChanged` events when we Add or Remove items from the collection. This means we don't call `OnPropertyChanged` when updating the collection.
+We will use an `ObservableCollection<Monkey>` that will be cleared and then loaded with **Monkey** objects. We use an `ObservableCollection` because it has built-in support to raise `CollectionChanged` events when we Add or Remove items from the collection. This means we don't call `OnPropertyChanged` when updating the collection. Although we won't be using these mechanisms withing the Xamarin.Android project, they are still features you could use with a classic Xamarin.Android project.
 
 1. In `MonkeysViewModel.cs` declare an auto-property which we will initialize to an empty collection. Also, we can set our Title to `Monkey Finder`.
 
 ```csharp
-public class MonkeysViewModel : BaseViewModel
+public class MonkeysViewModel
 {
     //...
     public ObservableCollection<Monkey> Monkeys { get; }
     public MonkeysViewModel()
     {
-        Title = "Monkey Finder";
         Monkeys = new ObservableCollection<Monkey>();
     }
     //...
 }
 ```
 
-### 7. Create GetMonkeysAsync Method
+### 6. Create GetMonkeysAsync Method
 
 We are ready to create a method named `GetMonkeysAsync` which will retrieve the monkey data from the internet. We will first implement this with a simple HTTP request, and later update it to grab and sync the data from Azure!
 
@@ -327,35 +187,20 @@ We are ready to create a method named `GetMonkeysAsync` which will retrieve the 
 public class MonkeysViewModel : BaseViewModel
 {
     //...
-    async Task GetMonkeysAsync()
+    public async Task GetMonkeysAsync()
     {
     }
     //...
 }
 ```
 
-2. In `GetMonkeysAsync`, first ensure `IsBusy` is false. If it is true, `return`
-
-```csharp
-async Task GetMonkeysAsync()
-{
-    if (IsBusy)
-        return;
-}
-```
-
 3. In `GetMonkeysAsync`, add some scaffolding for try/catch/finally blocks
-    - Notice, that we toggle *IsBusy* to true and then false when we start to call to the server and when we finish.
 
 ```csharp
 async Task GetMonkeysAsync()
 {
-    if (IsBusy)
-        return;
-
     try
     {
-        IsBusy = true;
 
     }
     catch (Exception ex)
@@ -364,7 +209,7 @@ async Task GetMonkeysAsync()
     }
     finally
     {
-       IsBusy = false;
+
     }
 
 }
@@ -373,13 +218,11 @@ async Task GetMonkeysAsync()
 4. In the `try` block of `GetMonkeysAsync`, we can get the monkeys from our Data Service.
 
 ```csharp
-async Task GetMonkeysAsync()
+public async Task GetMonkeysAsync()
 {
     ...
     try
     {
-        IsBusy = true;
-
         var monkeys = await DataService.GetMonkeysAsync();
     }
     ... 
@@ -389,13 +232,11 @@ async Task GetMonkeysAsync()
 6. Inside of the `using`, clear the `Monkeys` property and then add the new monkey data:
 
 ```csharp
-async Task GetMonkeysAsync()
+public async Task GetMonkeysAsync()
 {
     //...
     try
     {
-        IsBusy = true;
-
         var monkeys = await DataService.GetMonkeysAsync();
 
         Monkeys.Clear();
@@ -406,7 +247,7 @@ async Task GetMonkeysAsync()
 }
 ```
 
-7. In `GetMonkeysAsync`, add this code to the `catch` block to display a popup if the data retrieval fails:
+7. In `GetMonkeysAsync`, add this code to the `catch` block to display an error if the data retrieval fails:
 
 ```csharp
 async Task GetMonkeysAsync()
@@ -415,7 +256,6 @@ async Task GetMonkeysAsync()
     catch(Exception ex)
     {
         Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
-        await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
     }
     //...
 }
@@ -424,15 +264,10 @@ async Task GetMonkeysAsync()
 8. Ensure the completed code looks like this:
 
 ```csharp
-async Task GetMonkeysAsync()
+public async Task GetMonkeysAsync()
 {
-    if (IsBusy)
-        return;
-
     try
     {
-        IsBusy = true;
-
         var monkeys = await DataService.GetMonkeysAsync();
 
         Monkeys.Clear();
@@ -442,597 +277,290 @@ async Task GetMonkeysAsync()
     catch (Exception ex)
     {
         Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
-        await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
     }
     finally
     {
-        IsBusy = false;
+
     }
 }
 ```
 
 Our main method for getting data is now complete!
 
-#### 8. Create GetMonkeys Command
-
-Instead of invoking this method directly, we will expose it with a `Command`. A `Command` has an interface that knows what method to invoke and has an optional way of describing if the Command is enabled.
-
-1. In `MonkeysViewModel.cs`, create a new Command called `GetMonkeysCommand`:
-
-```csharp
-public class MonkeysViewModel : BaseViewModel
-{
-    //...
-    public Command GetMonkeysCommand { get; }
-    //...
-}
-```
-
-2. Inside of the `SpeakersViewModel` constructor, create the `GetSpeakersCommand` and pass it two methods
-    - One to invoke when the command is executed
-    - Another that determines if the command is enabled. Both methods can be implemented as lambda expressions as shown below:
-
-```csharp
-public class MonkeysViewModel : BaseViewModel
-{
-    //...
-    public MonkeysViewModel()
-    {
-        //...
-        GetMonkeysCommand = new Command(async () => await GetMonkeysAsync());
-    }
-    //...
-}
-```
-
-## 9. Build The Monkeys User Interface
-It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`. Our end result is to build a page that looks like this:
+## 7. Build The Monkeys User Interface
+It is now time to build the Xamarin.Android user interface in the Xamarin.Android project. Our end result is to build a page that looks like this:
 
 ![](Art/FinalUI.PNG)
 
-1. In `MainPage.xaml`, add a `BindingContext` between the `ContentPage` tags, which will enable us to get binding intellisense:
+1. In `Resources/layout/activity_main.axml`, create a `FrameLayout` that will house our fragments. You can also add a `Toolbar` to manage navigation!
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <!-- Add this -->
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-</ContentPage>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="#e5e5e5"
+        android:id="@+id/main_container" />
+</android.support.design.widget.CoordinatorLayout>
 ```
 
-2. We can create our first binding on the `ContentPage` by adding the `Title` Property:
+2. We can create our first main fragment layout by creating a `RecyclerView` which will display a list of our monkeys. Create a new `.axml` file called `Resources/layout/fragment_monkeys.axml`.
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}"> <!-- Add this -->
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-</ContentPage>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/monkeysRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e5e5e5"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+  </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
 ```
 
-2. In the `MainPage.xaml`, we can add a `Grid` between the `ContentPage` tags with 2 rows and 2 columns. We will also set the `RowSpacing` and `ColumnSpacing` to
+3. We need to display a wonderful monkey item which you can create a new `.axml` file called `Resources/layout/monkey_item.axml` and use the following code:
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="4dp"
+    app:cardUseCompatPadding="true">
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- Add this -->
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-    </Grid>
-</ContentPage>
+        <ImageView
+            android:id="@+id/monkeyImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/monkeyNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toEndOf="@+id/monkeyImageView"
+            app:layout_constraintTop_toTopOf="@+id/monkeyImageView" />
+
+        <TextView
+            android:id="@+id/monkeyLocationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toEndOf="@+id/monkeyImageView"
+            app:layout_constraintTop_toBottomOf="@+id/monkeyNameTextView" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
 ```
 
-3. In the `MainPage.xaml`, we can add a `ListView` between the `Grid` tags that spans 2 Columns. We will also set the `ItemsSource` which will bind to our `Monkeys` ObservableCollection and additionally set a few properties for optimizing the list.
+2. There's a lot to unpack with setting up our project with fragments. So let's go ahead and modify our `Activities/MainActivity.cs` to specify the first fragment transaction. Don't worry if code doesn't compile here as we have a few steps in-order to get our fragment created using `RecyclerView`.
 
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
+```csharp
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    public class MainActivity : AppCompatActivity
+    {
+        private Android.Support.V4.App.FragmentManager fragmentManager;
+        private Android.Support.V4.App.Fragment monkeysFragment;
+        public Android.Support.V7.Widget.Toolbar _toolbar;
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-    <!-- Add this -->
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-         <ListView ItemsSource="{Binding Monkeys}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  Grid.ColumnSpan="2">
+            SetContentView(Resource.Layout.activity_main);
 
-        </ListView>
-    </Grid>
-</ContentPage>
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            _toolbar = toolbar;
+            SetSupportActionBar(toolbar);
+
+            fragmentManager = SupportFragmentManager;
+
+            monkeysFragment = new MonkeyListFragment();
+
+            fragmentManager.BeginTransaction().Replace(Resource.Id.main_container, monkeysFragment).Commit();
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 ```
 
-4. In the `MainPage.xaml`, we can add a `ItemTemplate` to our `ListView` that will represent what each item in the list displays:
+5. Next, because we want to use the `ViewHolder` pattern with our `RecyclerView`, we can define a new file called `ViewHolders/MonkeyViewHolder.cs` which will hold a reference to our view elements.
 
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
+```csharp
+    public class MonkeyViewHolder : RecyclerView.ViewHolder
+    {
+        public ImageView Image { get; set; }
+        public TextView Name { get; set; }
+        public TextView Location { get; set; }
+        public MonkeyViewHolder(View view, Action<int> listener) : base(view)
+        {
+            Image = view.FindViewById<ImageView>(Resource.Id.monkeyImageView);
+            Name = view.FindViewById<TextView>(Resource.Id.monkeyNameTextView);
+            Location = view.FindViewById<TextView>(Resource.Id.monkeyLocationTextView);
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
-
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-         <ListView ItemsSource="{Binding Monkeys}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  Grid.ColumnSpan="2">
-            <!-- Add this -->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid ColumnSpacing="10" Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    WidthRequest="60"
-                                    HeightRequest="60"
-                                    Aspect="AspectFill"/>
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Location}"/>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
-</ContentPage>
+            view.Click += (sender, e) => listener(base.LayoutPosition);
+        }
+    }
 ```
 
-5. In the `MainPage.xaml`, we can add a `Button` under our `ListView` that will enable us to click it and get the monkeys from the server:
+4. Much of this won't make too much sense until you start to work on the `RecyclerView` side of things. So we're going to start by creating a new `Adapter` called `Adapters/MonkeysRecyclerViewAdapter.cs`. Inside we will be using `Glide` which is a popular image loading library within the Android ecosystem to handle our monkey images. We'll be binding to a view holder we created previously.
 
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
+```csharp
+public class MonkeysRecyclerViewAdapter : RecyclerView.Adapter
+    {
+        private Context _context;
+        private MonkeysViewModel _viewModel;
+        public event EventHandler<int> ItemClick;
+        public override int ItemCount => _viewModel.Monkeys.Count;
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+        public MonkeysRecyclerViewAdapter(Context context, MonkeysViewModel viewModel)
+        {
+            _context = context;
+            _viewModel = viewModel;
+        }
 
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            MonkeyViewHolder vh = holder as MonkeyViewHolder;
+            Glide.With(_context).Load(_viewModel.Monkeys[position].Image.ToString()).CenterCrop().Override(300, 400).Into(vh.Image);
+            vh.Name.Text = _viewModel.Monkeys[position].Name;
+            vh.Location.Text = _viewModel.Monkeys[position].Location;
+        }
 
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-         <ListView ItemsSource="{Binding Monkeys}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid ColumnSpacing="10" Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    WidthRequest="60"
-                                    HeightRequest="60"
-                                    Aspect="AspectFill"/>
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Location}"/>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <!-- Add this -->
-        <Button Text="Search"
-                Command="{Binding GetMonkeysCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="0"/>
-    </Grid>
-</ContentPage>
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.monkey_item, parent, false);
+            MonkeyViewHolder vh = new MonkeyViewHolder(view, OnClick);
+            return vh;
+        }
+
+        void OnClick(int position)
+        {
+            ItemClick?.Invoke(this, position);
+        }
+    }
 ```
 
+3. Now we're ready to create our `Fragments/MonkeyListFragment`. Create a new fragment and add the following code
 
-6. Finally, In the `MainPage.xaml`, we can add a `ActivityIndicator` above all of our controls at the very bottom or `Grid` that will show an indication that something is happening when we press the Search button.
+```csharp
+    public class MonkeyListFragment : Android.Support.V4.App.Fragment
+    {
+        private MainActivity _activity;
+        private Android.Support.V4.App.FragmentManager fragmentManager;
+        private Android.Support.V4.App.Fragment monkeyDetailFragment;
+        private MonkeysViewModel monkeysViewModel = new MonkeysViewModel();
 
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            _activity._toolbar.Title = "Monkey Finder";
+            View view = inflater.Inflate(Resource.Layout.fragment_monkeys, container, false);
+            var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.monkeysRecyclerView);
 
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
+            Task.Run(async () => {
+                await monkeysViewModel.GetMonkeysAsync();
+            }).Wait();
 
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-         <ListView ItemsSource="{Binding Monkeys}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid ColumnSpacing="10" Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    WidthRequest="60"
-                                    HeightRequest="60"
-                                    Aspect="AspectFill"/>
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Location}"/>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            MonkeysRecyclerViewAdapter adapter = new MonkeysRecyclerViewAdapter(Context, monkeysViewModel);
+            adapter.ItemClick += Adapter_ItemClick;
+            recyclerView.SetAdapter(adapter);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Context);
+            recyclerView.SetLayoutManager(layoutManager);
+            return view;
+        }
 
-        <Button Text="Search"
-                Command="{Binding GetMonkeysCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="0"/>
+        private void Adapter_ItemClick(object sender, int e)
+        {
+            var monkey = monkeysViewModel.Monkeys[e];
+            monkeyDetailFragment = new MonkeyDetailFragment(monkey);
+            fragmentManager.BeginTransaction().Replace(Resource.Id.main_container, monkeyDetailFragment).AddToBackStack(monkey.Name).Commit();
+        }
 
+        public override void OnAttach(Context context)
+        {
+            base.OnAttach(context);
+            var activity = context as MainActivity;
+            _activity = activity;
+            fragmentManager = activity.SupportFragmentManager;
+        }
 
-        <!-- Add this -->
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                           IsRunning="{Binding IsBusy}"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2"/>
-    </Grid>
-</ContentPage>
+    }
 ```
 
+### 8. Run the App
 
-### 10. Run the App
-
-1. In Visual Studio, set the iOS, Android, or UWP project as the startup project 
+1. In Visual Studio, set the Android project as the startup project 
 
 2. In Visual Studio, click "Start Debugging"
     - If you are having any trouble, see the Setup guides below for your runtime platform
-
-#### iOS Setup
-
-If you are on a Windows PC then you will need to be connected to a macOS build host with the Xamarin tools installed to run and debug the app.
-
-If connected, you will see a Green connection status. Select `iPhoneSimulator` as your target, and then select a Simulator to debug on.
-
-![iOS Setup](https://content.screencast.com/users/JamesMontemagno/folders/Jing/media/a6b32d62-cd3d-41ea-bd16-1bcc1fbe1f9d/2016-07-11_1445.png)
 
 #### Android Setup
 
 Set the MonkeyFinder.Droid as the startup project and select your emulator or device to start debugging. With help for deployment head over to our [documentation](https://docs.microsoft.com/xamarin/android/deploy-test/debugging/).
 
-#### Windows 10 Setup
-
-Set the MonkeyFinder.UWP as the startup project and select debug to **Local Machine**.
-
-### 12. Find Closest Monkey!
-
-We can add more functionality to this page using the GPS of the device since each monkey has a latitude and longitude associated with it.
-
-1. In our `MonkeysViewModel.cs`, let's create another method called `GetClosestAsync`:
-
-```csharp
-async Task GetClosestAsync()
-{
-
-}
-```
-
-We can then fill it in by using Xamarin.Essentials to query for our location and helpers that find the closest monkey to us:
-
-```csharp
-async Task GetClosestAsync()
-{
-    if (IsBusy || Monkeys.Count == 0)
-        return;
-
-    try
-    {
-        // Get cached location, else get real location.
-        var location = await Geolocation.GetLastKnownLocationAsync();
-        if (location == null)
-        {
-            location = await Geolocation.GetLocationAsync(new GeolocationRequest
-            {
-                DesiredAccuracy = GeolocationAccuracy.Medium,
-                Timeout = TimeSpan.FromSeconds(30)
-            });
-        }
-
-        // Find closest monkey to us
-        var first = Monkeys.OrderBy(m => location.CalculateDistance(
-            new Location(m.Latitude, m.Longitude), DistanceUnits.Miles))
-            .FirstOrDefault();
-
-        await Application.Current.MainPage.DisplayAlert("", first.Name + " " +
-            first.Location, "OK");
-
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"Unable to query location: {ex.Message}");
-        await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
-    }
-}
-```
-
-2. We can now create a new `Command` that we can bind to:
-
-```csharp
-// ..
-public Command GetClosestCommand { get; }
-public MonkeysViewModel()
-{
-    // ..
-    GetClosestCommand = new Command(async () => await GetClosestAsync());
-}
-```
-
-3. Back in our `MainPage.xaml` we can add another `Button` that will call this new method:
-
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MonkeyFinder"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             x:Class="MonkeyFinder.View.MainPage"
-             Title="{Binding Title}">
-
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeysViewModel/>
-    </ContentPage.BindingContext>
-
-
-    <Grid RowSpacing="0" ColumnSpacing="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-         <ListView ItemsSource="{Binding Monkeys}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid ColumnSpacing="10" Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    WidthRequest="60"
-                                    HeightRequest="60"
-                                    Aspect="AspectFill"/>
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Location}"/>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Text="Search"
-                Command="{Binding GetMonkeysCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="0"/>
-
-        <!-- Add this -->
-        <Button Text="Find Closest" 
-                Command="{Binding GetClosestCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="1"/>
-
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                           IsRunning="{Binding IsBusy}"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2"/>
-    </Grid>
-</ContentPage>
-```
-
-Re-run the app to see geolocation in action!
-
-### 13. Fancy Circle Monkeys!
-
-Xamarin.Forms gives developers a great base set of controls to use for applications, but can easily be extended. I created a very popular custom control call [Circle Image for Xamarin.Forms](https://github.com/jamesmontemagno/ImageCirclePlugin) and we can replace the base `Image` with a custom control:
-
-In our `MainPage.xaml` replace:
-
-```xml
-<Image Source="{Binding Image}"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
-        WidthRequest="60"
-        HeightRequest="60"
-        Aspect="AspectFill"/>
-```
-
-with our new `CircleImage`:
-
-```xml
-<circle:CircleImage Source="{Binding Image}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    BorderColor="{StaticResource PrimaryDark}"
-                    BorderThickness="3"
-                    WidthRequest="60"
-                    HeightRequest="60"
-                    Aspect="AspectFill"/>
-```
-
-Note: that the `PrimaryDark` color is defined in our App.xaml as a global resource.
-
-Re-run the app to see circle images in action!
-
-### 14. Add Navigation
-
-Now, let's add navigation to a second page that displays monkey details!
-
-1. In `MainPage.xaml` we can add an `ItemSelected` event to the `ListView`:
-
-Before:
-
-```xml
-<ListView ItemsSource="{Binding Monkeys}"
-            CachingStrategy="RecycleElement"
-            HasUnevenRows="True"
-            Grid.ColumnSpan="2">
-```
-
-After:
-```xml
-<ListView ItemsSource="{Binding Monkeys}"
-            CachingStrategy="RecycleElement"
-            ItemSelected="ListView_ItemSelected"
-            HasUnevenRows="True"
-            Grid.ColumnSpan="2">
-```
-
-
-2. In `MainPage.xaml.cs`, create a method called `ListView_ItemSelected`:
-    - This code checks to see if the selected item is non-null and then use the built in `Navigation` API to push a new page and deselect the item.
-
-```csharp
-async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-{
-    var monkey = e.SelectedItem as Monkey;
-    if (monkey == null)
-        return;
-
-    await Navigation.PushAsync(new DetailsPage(monkey));
-
-    ((ListView)sender).SelectedItem = null;
-}
-```
-
-### 15. ViewModel for Details
+### 9. ViewModel for Details
 
 1. Inside of our `ViewModel/MonkeyDetailsViewModel.cs` will house our logic for assigning the monkey to the view model and also opening a map page using Xamarin.Essentials to the monkey's location.
 
-Let's first create a bindable property for the `Monkey`:
-
 ```csharp
-public class MonkeyDetailsViewModel : BaseViewModel
+public class MonkeyDetailsViewModel
 {
     public MonkeyDetailsViewModel()
     {
@@ -1042,7 +570,6 @@ public class MonkeyDetailsViewModel : BaseViewModel
         : this()
     {
         Monkey = monkey;
-        Title = $"{Monkey.Name} Details";
     }
     Monkey monkey;
     public Monkey Monkey
@@ -1054,27 +581,17 @@ public class MonkeyDetailsViewModel : BaseViewModel
                 return;
 
             monkey = value;
-            OnPropertyChanged();
         }
     }
 }
 ```
 
-2. Now we can create an `OpenMapCommand` and method `OpenMapAsync` to open the map to the monkey's location:
+2. Now we can create a method `OpenMapAsync` to open the map to the monkey's location:
 
 ```csharp
-public class MonkeyDetailsViewModel : BaseViewModel
+public class MonkeyDetailsViewModel
 {
-    public Command OpenMapCommand { get; }
-    
-    public MonkeyDetailsViewModel()
-    {
-        OpenMapCommand = new Command(async () => await OpenMapAsync()); 
-    }
-
-    //..
-
-    async Task OpenMapAsync()
+    public async Task OpenMapAsync()
     {
         try
         {
@@ -1083,98 +600,170 @@ public class MonkeyDetailsViewModel : BaseViewModel
         catch (Exception ex)
         {
             Debug.WriteLine($"Unable to launch maps: {ex.Message}");
-            await Application.Current.MainPage.DisplayAlert("Error, no Maps app!", ex.Message, "OK");
         }
     }
 }
 ```
 
-### 16. Create DetailsPage.xaml UI
+### 10. Create Details UI
 
-Let's add UI to the DetailsPage. Our end goal is to get a fancy profile screen like this:
+Let's add UI to our details screen. Our end goal is to get a fancy profile screen like this:
 
 ![](Art/Details.PNG)
 
-At the core is a `ScrollView`, `StackLayout`, and `Grid` to layout all of the controls nicely on the screen:
+### 11. Navigate to the second fragment
+
+Now, let's add navigation to a second fragment that displays monkey details!
+
+1. First we will create a new layout for this fragment called `Resources/layout/fragment_monkey_detail.axml`.
 
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
-             x:Class="MonkeyFinder.View.DetailsPage"
-             Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <viewmodel:MonkeyDetailsViewModel/>
-    </ContentPage.BindingContext>
-    <ScrollView>
-        <StackLayout>
-            <Grid>
-                <!-- Monkey image and background -->
-            </Grid>   
-            <!-- Name, map button, and details -->
-        </StackLayout>
-    </ScrollView>
-</ContentPage>
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/monkeyImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/monkeyLocationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:minLines="2"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/monkeyImageView"
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/monkeyPopulationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toEndOf="@+id/monkeyImageView"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/showOnMapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monkeyImageView" />
+
+    <TextView
+        android:id="@+id/monkeyNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/showOnMapButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monkeyImageView" />
+
+    <TextView
+        android:id="@+id/monkeyDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showOnMapButton" />
+
+</android.support.constraint.ConstraintLayout>
 ```
 
-We can now fill in our `Grid` with the following code:
 
-```xml
-<Grid.RowDefinitions>
-    <RowDefinition Height="100"/>
-    <RowDefinition Height="Auto"/>
-</Grid.RowDefinitions>
-<Grid.ColumnDefinitions>
-    <ColumnDefinition Width="*"/>
-    <ColumnDefinition Width="Auto"/>
-    <ColumnDefinition Width="*"/>
-</Grid.ColumnDefinitions>
-<BoxView BackgroundColor="{StaticResource Primary}" HorizontalOptions="FillAndExpand"
-            HeightRequest="100" Grid.ColumnSpan="3"/>
-<StackLayout Grid.RowSpan="2" Grid.Column="1" Margin="0,50,0,0">
+2. Next, we'll create a new fragment class for the details screen called `Fragments/MonkeyDetailFragment.cs` and add the following code:
 
-    <imagecircle:CircleImage FillColor="White" 
-                            BorderColor="White"
-                            BorderThickness="2"
-                            Source="{Binding Monkey.Image}"
-                            VerticalOptions="Center"
-                                HeightRequest="100"
-                                WidthRequest="100"
-                            Aspect="AspectFill"/>
-</StackLayout>
+```csharp
+public class MonkeyDetailFragment : Android.Support.V4.App.Fragment
+    {
+        private FloatingActionButton lightSwitchFloatingActionButton { get; set; }
+        private TextView monkeyNameTextView { get; set; }
+        private TextView monkeyLocationTextView { get; set; }
+        private TextView monkeyPopulationTextView { get; set; }
+        private TextView monkeyDetailsTextView { get; set; }
+        private ImageView monkeyImageView { get; set; }
+        private FloatingActionButton showOnMapButton { get; set; }
+        private MonkeyDetailsViewModel viewModel;
+        public MonkeyDetailFragment(Monkey monkey)
+        {
+            viewModel = new MonkeyDetailsViewModel(monkey);
+        }
 
-<Label FontSize="Micro" Text="{Binding Monkey.Location}" HorizontalOptions="Center" Grid.Row="1" Margin="10"/>
-<Label FontSize="Micro" Text="{Binding Monkey.Population}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="2" Margin="10"/>
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            View view = inflater.Inflate(Resource.Layout.fragment_monkey_detail, container, false);
+
+            monkeyNameTextView = view.FindViewById<TextView>(Resource.Id.monkeyNameTextView);
+            monkeyLocationTextView = view.FindViewById<TextView>(Resource.Id.monkeyLocationTextView);
+            monkeyPopulationTextView = view.FindViewById<TextView>(Resource.Id.monkeyPopulationTextView);
+            monkeyDetailsTextView = view.FindViewById<TextView>(Resource.Id.monkeyDetailsTextView);
+            monkeyImageView = view.FindViewById<ImageView>(Resource.Id.monkeyImageView);
+            showOnMapButton = view.FindViewById<FloatingActionButton>(Resource.Id.showOnMapButton);
+
+            Glide.With(this).Load(viewModel.Monkey.Image.ToString()).CenterCrop().Override(200, 200).Into(monkeyImageView);
+            monkeyNameTextView.Text = viewModel.Monkey.Name;
+            monkeyLocationTextView.Text = viewModel.Monkey.Location;
+            monkeyPopulationTextView.Text = viewModel.Monkey.Population.ToString();
+            monkeyDetailsTextView.Text = viewModel.Monkey.Details;
+
+            showOnMapButton.Click += ShowOnMapButton_Click;
+
+            return view;
+        }
+
+        private async void ShowOnMapButton_Click(object sender, EventArgs e)
+        {
+            await viewModel.OpenMapAsync();
+        }
+
+        public override void OnAttach(Context context)
+        {
+            base.OnAttach(context);
+            var activity = context as MainActivity;
+            activity._toolbar.Title = viewModel.Monkey.Name;
+        }
+    }
 ```
-
-Finally, under the `Grid`, but inside of the `StackLayout` we will add details about the monkey.
-
-```xml
-<Label Text="{Binding Monkey.Name}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
-<Button Text="Open Map" 
-        Command="{Binding OpenMapCommand}"
-        HorizontalOptions="Center" 
-        WidthRequest="200" 
-        Style="{StaticResource ButtonOutline}"/>
-
-<BoxView HeightRequest="1" Color="#DDDDDD"/>
-
-<Label Text="{Binding Monkey.Details}" Margin="10"/>
-```
-
-
-### 17. iOS Optimizations
-
-On both of our `MainPage.xaml` and `DetailsPage.xaml` we can add a Xamarin.Forms platform specific that will light up special functionality for iOS to use `Safe Area` on iPhone X devices. We can simply add the following code into the `ContentPage` main node:
-
-```xml
-xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-ios:Page.UseSafeArea="True"
-```
-
-That is it! our application is complete! Now on to the Azure backend which is part of our Twitch live stream.
 
 ## Azure
 
@@ -1192,11 +781,11 @@ In addition, they can be bound to other Azure services. So as we'll see, we can 
 
 We're going to do all of our development in VS Code. It has a great extension that makes Function development easy - and you can even deploy to Azure from it!
 
-### 18. Grab the VS Code Functions Extension
+### 12. Grab the VS Code Functions Extension
 
 Open up your copy of VS Code, go to the Extension pane, and search the store for the [Azure Functions](https://code.visualstudio.com/tutorials/functions-extension/getting-started?WT.mc_id=xamarinworkshoptwitch-github-masoucou) extension. Install that.
 
-### 19. Opening the Functions Project
+### 13. Opening the Functions Project
 
 Once the extension is installed, let's open the Functions project and take a look around.
 
@@ -1214,7 +803,7 @@ There will be several files in that directory:
 
 The `Models` folder holds classes that model the data for us. The `GetAllMonkeys.cs` is the function which will return all the monkeys from Azure Cosmos DB. The `UpdateMonkey.cs` is the Function which will update the monkey.
 
-### 20. Returning All the Monkeys
+### 14. Returning All the Monkeys
 
 Let's take a look at the `GetAllMonkeys.cs` file.
 
@@ -1268,7 +857,7 @@ return new OkObjectResult(allMonkeys);
 
 And that literally is the whole body of the function!
 
-### 21. Deploying the Function
+### 15. Deploying the Function
 
 To deploy the function, go to the command pallette in VS Code, and start typing in `Azure Functions: Deploy to Function App`.
 
@@ -1282,7 +871,7 @@ That's my read-only key.
 
 If you don't want to deploy, my function is at: https://xam-workshop-twitch-func.azurewebsites.net/api/GetAllMonkeys
 
-### 23. Consuming the Function
+### 16. Consuming the Function
 
 This is pretty easy!
 
@@ -1292,13 +881,13 @@ And that's it.
 
 Run the project again and you'll have new monkeys!
 
-### 24. Updating Monkeys
+### 17. Updating Monkeys
 
 Within the function app you'll see a means to update monkeys as well. I'll leave it as an exercise for you to go about implementing it. As you'll need to create the Azure Comos DB.
 
 The Forms project already has the stubs in place for it though.
 
-### 25. Visual Studio App Center
+### 18. Visual Studio App Center
 
 Finally, we're going to rub a little DevOps on it with Visual Studio App Center.
 
