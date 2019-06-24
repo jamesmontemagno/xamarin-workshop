@@ -42,31 +42,5 @@ namespace MonkeyFinder.ViewModel
             {
             }
         }
-
-        public async Task GetClosestAsync()
-        {
-            try
-            {
-                var location = await Geolocation.GetLastKnownLocationAsync();
-                if (location == null)
-                {
-                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
-                    {
-                        DesiredAccuracy = GeolocationAccuracy.Medium,
-                        Timeout = TimeSpan.FromSeconds(30)
-                    });
-                }
-
-                var first = Monkeys.OrderBy(m => location.CalculateDistance(
-                    new Location(m.Latitude, m.Longitude), DistanceUnits.Miles))
-                    .FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Unable to query location: {ex.Message}");
-            }
-        }
-
-
     }
 }
