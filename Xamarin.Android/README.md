@@ -99,7 +99,7 @@ public class MonkeysViewModel
 {
     //...
     public ObservableCollection<Monkey> Monkeys { get; }
-    public MonkeysViewModel()
+    public  MonkeysViewModel()
     {
         Monkeys = new ObservableCollection<Monkey>();
     }
@@ -111,7 +111,7 @@ public class MonkeysViewModel
 
 We are ready to create a method named `GetMonkeysAsync` which will retrieve the monkey data from the internet. We will first implement this with a simple HTTP request, and later update it to grab and sync the data from Azure!
 
-1. In `SpeakersViewModel.cs`, create a method named `GetMonkeysAsync` with that returns `async Task`:
+1. In `MonkeysViewModel.cs`, create a method named `GetMonkeysAsync` with that returns `async Task`:
 
 ```csharp
 public class MonkeysViewModel
