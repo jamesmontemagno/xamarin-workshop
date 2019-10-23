@@ -1,4 +1,5 @@
 ﻿using MonkeyFinder.Model;
+using MonkeyFinder.ViewModel;
 using Xamarin.Forms;
 
 namespace MonkeyFinder.View
@@ -8,6 +9,7 @@ namespace MonkeyFinder.View
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MonkeysViewModel();
         }
 
         async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

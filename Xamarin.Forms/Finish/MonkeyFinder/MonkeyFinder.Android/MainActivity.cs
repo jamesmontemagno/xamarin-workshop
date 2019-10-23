@@ -21,10 +21,10 @@ namespace MonkeyFinder.Droid
             base.OnCreate(savedInstanceState);
 
             ImageCircleRenderer.Init();
-            Android.Glide.Forms.Init();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
+            Android.Glide.Forms.Init(this);
 
             LoadApplication(new App());
         }
