@@ -126,7 +126,7 @@ public event PropertyChangedEventHandler PropertyChanged;
     - Note: We will call `OnPropertyChanged` whenever a property updates
 
 ```csharp
-private void OnPropertyChanged([CallerMemberName] string name = null)
+protected void OnPropertyChanged([CallerMemberName] string name = null)
 {
 
 }
@@ -135,7 +135,7 @@ private void OnPropertyChanged([CallerMemberName] string name = null)
 7. Add code to `OnPropertyChanged`:
 
 ```csharp
-private void OnPropertyChanged([CallerMemberName] string name = null) =>
+protected void OnPropertyChanged([CallerMemberName] string name = null) =>
     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 ```
 
@@ -238,7 +238,7 @@ public class MonkeysViewModel : BaseViewModel
 
 We are ready to create a method named `GetMonkeysAsync` which will retrieve the monkey data from the internet. We will first implement this with a simple HTTP request using HttpClient!
 
-1. In `MonkeysViewModel.cs`, create a method named `GetMonkeysAsync` with that returns `async Task`:
+1. In `MonkeysViewModel.cs`, create a method named `GetMonkeysAsync` that returns `async Task`:
 
 ```csharp
 public class MonkeysViewModel : BaseViewModel
@@ -391,9 +391,7 @@ public class MonkeysViewModel : BaseViewModel
 }
 ```
 
-2. Inside of the `MonkeysViewModel` constructor, create the `GetMonkeysCommand` and pass it two methods
-    - One to invoke when the command is executed
-    - Another that determines if the command is enabled. Both methods can be implemented as lambda expressions as shown below:
+2. Inside of the `MonkeysViewModel` constructor, create the `GetMonkeysCommand` and pass a method to invoke when the command is executed. This method can be implemented as lambda expression as shown below:
 
 ```csharp
 public class MonkeysViewModel : BaseViewModel
@@ -449,7 +447,7 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
 </ContentPage>
 ```
 
-2. In the `MainPage.xaml`, we can add a `Grid` between the `ContentPage` tags with 2 rows and 2 columns. We will also set the `RowSpacing` and `ColumnSpacing` to
+3. In the `MainPage.xaml`, we can add a `Grid` between the `ContentPage` tags with 2 rows and 2 columns. We will also set the `RowSpacing` and `ColumnSpacing` to specify the distance between rows and columns in the `Grid`.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -478,7 +476,7 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
 </ContentPage>
 ```
 
-3. In the `MainPage.xaml`, we can add a `ListView` between the `Grid` tags that spans 2 Columns. We will also set the `ItemsSource` which will bind to our `Monkeys` ObservableCollection and additionally set a few properties for optimizing the list.
+4. In the `MainPage.xaml`, we can add a `ListView` between the `Grid` tags that spans 2 Columns. We will also set the `ItemsSource` which will bind to our `Monkeys` ObservableCollection and additionally set a few properties for optimizing the list.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -514,7 +512,7 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
 </ContentPage>
 ```
 
-4. In the `MainPage.xaml`, we can add a `ItemTemplate` to our `ListView` that will represent what each item in the list displays:
+5. In the `MainPage.xaml`, we can add a `ItemTemplate` to our `ListView` that will represent what each item in the list displays:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -577,7 +575,7 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
 </ContentPage>
 ```
 
-5. In the `MainPage.xaml`, we can add a `Button` under our `ListView` that will enable us to click it and get the monkeys from the server:
+6. In the `MainPage.xaml`, we can add a `Button` under our `ListView` that will enable us to click it and get the monkeys from the server:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -649,7 +647,7 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
 ```
 
 
-6. Finally, In the `MainPage.xaml`, we can add a `ActivityIndicator` above all of our controls at the very bottom or `Grid` that will show an indication that something is happening when we press the Search button.
+7. Finally, In the `MainPage.xaml`, we can add a `ActivityIndicator` above all of our controls at the very bottom or `Grid` that will show an indication that something is happening when we press the Search button.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -707,7 +705,9 @@ It is now time to build the Xamarin.Forms user interface in `View/MainPage.xaml`
                 Command="{Binding GetMonkeysCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
-                Grid.Column="0"/>
+                Grid.Column="0"
+                Style="{StaticResource ButtonOutline}"
+                Margin="8"/>
 
 
         <!-- Add this -->
@@ -868,7 +868,9 @@ public MonkeysViewModel()
                 Command="{Binding GetMonkeysCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
-                Grid.Column="0"/>
+                Grid.Column="0"
+                Style="{StaticResource ButtonOutline}"
+                Margin="8"/>
 
         <!-- Add this -->
         <Button Text="Find Closest" 
@@ -1039,17 +1041,17 @@ We can now fill in our `Grid` with the following code:
     <ColumnDefinition Width="*"/>
 </Grid.ColumnDefinitions>
 <BoxView BackgroundColor="{StaticResource Primary}" HorizontalOptions="FillAndExpand"
-            HeightRequest="100" Grid.ColumnSpan="3"/>
+         HeightRequest="100" Grid.ColumnSpan="3"/>
 <StackLayout Grid.RowSpan="2" Grid.Column="1" Margin="0,50,0,0">
 
-    <imagecircle:CircleImage FillColor="White" 
-                            BorderColor="White"
-                            BorderThickness="2"
-                            Source="{Binding Monkey.Image}"
-                            VerticalOptions="Center"
-                                HeightRequest="100"
-                                WidthRequest="100"
-                            Aspect="AspectFill"/>
+    <imagecircle:CircleImage FillColor="White"
+                             BorderColor="White"
+                             BorderThickness="2"
+                             Source="{Binding Monkey.Image}"
+                             VerticalOptions="Center"
+                             HeightRequest="100"
+                             WidthRequest="100" 
+                             Aspect="AspectFill"/>
 </StackLayout>
 
 <Label FontSize="Micro" Text="{Binding Monkey.Location}" HorizontalOptions="Center" Grid.Row="1" Margin="10"/>
